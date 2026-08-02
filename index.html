@@ -7,7 +7,7 @@
     <style>
         /* Cute aesthetic styling */
         body {
-            background-color: #ffe6ea; /* Soft pastel pink */
+            background-color: #ffe6ea;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
@@ -15,7 +15,7 @@
             height: 100vh;
             margin: 0;
             text-align: center;
-            color: #5a3e46; /* Soft dark brown/pink for text */
+            color: #5a3e46;
         }
         
         /* Container for each screen */
@@ -65,7 +65,7 @@
         #typewriter-text {
             font-size: 18px;
             line-height: 1.6;
-            min-height: 120px; /* Keeps the box size stable while typing */
+            min-height: 120px;
             margin-bottom: 25px;
             text-align: left;
             border-left: 4px solid #ffb6c1;
@@ -83,13 +83,12 @@
     <!-- Screen 1: The Menu -->
     <div id="screen1" class="screen active">
         <h1>I'm so sorry 🥺</h1>
-        <button onclick="goToScreen(1, 2)">Open</button>
+        <button onclick="goToScreen('screen1', 'screen2')">Open</button>
     </div>
 
     <!-- Screen 2: The Question -->
     <div id="screen2" class="screen">
         <h1>Are u hurt?</h1>
-        <!-- Both buttons trigger the same apology screen -->
         <button onclick="startApology()">Yes</button>
         <button onclick="startApology()">No</button>
     </div>
@@ -97,8 +96,7 @@
     <!-- Screen 3: The Typewriter Apology -->
     <div id="screen3" class="screen">
         <div id="typewriter-text"></div>
-        <!-- This button stays hidden until the typing is totally finished -->
-        <button id="next-btn" style="display: none;" onclick="goToScreen(3, 4)">Next</button>
+        <button id="next-btn" style="display: none;" onclick="goToScreen('screen3', 'screen4')">Next</button>
     </div>
 
     <!-- Screen 4: The Final Message -->
@@ -121,18 +119,15 @@ Thank you for reading this. Whether it takes time or not, I hope I can earn back
 I'm truly sorry and i love you.
 ❤️";
         
-        
-        // --- Logic & Animations below ---
-
         // Function to switch between screens
-        function goToScreen(current, next) {
-            document.getElementById(`screen${current}`).classList.remove('active');
-            document.getElementById(`screen${next}`).classList.add('active');
+        function goToScreen(currentId, nextId) {
+            document.getElementById(currentId).classList.remove('active');
+            document.getElementById(nextId).classList.add('active');
         }
 
         // Function triggered when she clicks Yes or No
         function startApology() {
-            goToScreen(2, 3);
+            goToScreen('screen2', 'screen3');
             typeWriter();
         }
 
@@ -141,12 +136,13 @@ I'm truly sorry and i love you.
         const typingSpeed = 45; // Speed in milliseconds (lower is faster)
 
         function typeWriter() {
+            // Check to make sure we haven't reached the end of the text
             if (i < myApology.length) {
                 document.getElementById("typewriter-text").innerHTML += myApology.charAt(i);
                 i++;
                 setTimeout(typeWriter, typingSpeed);
             } else {
-                // Once the message is done typing, show the "Next" button
+                // Show the "Next" button when finished
                 document.getElementById("next-btn").style.display = "inline-block";
             }
         }
