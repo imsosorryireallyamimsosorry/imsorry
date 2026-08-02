@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        /* Cute aesthetic styling */
+        body {
+            background-color: #ffe6ea; /* Soft pastel pink */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            color: #5a3e46; /* Soft dark brown/pink for text */
+        }
+        
+        /* Container for each screen */
+        .screen {
+            display: none;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
+            max-width: 85%;
+            width: 400px;
+        }
+        
+        /* Smooth fade-in animation for screen transitions */
+        .active {
+            display: block;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        h1 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        /* Cute rounded buttons */
+        button {
+            background-color: #ffb6c1;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            margin: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(255, 182, 193, 0.3);
+        }
+        
+        button:hover {
+            background-color: #ff91a4;
+            transform: scale(1.05);
+        }
+
+        /* Typewriter text area */
+        #typewriter-text {
+            font-size: 18px;
+            line-height: 1.6;
+            min-height: 120px; /* Keeps the box size stable while typing */
+            margin-bottom: 25px;
+            text-align: left;
+            border-left: 4px solid #ffb6c1;
+            padding-left: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Screen 1: The Menu -->
+    <div id="screen1" class="screen active">
+        <h1>I'm so sorry 🥺</h1>
+        <button onclick="goToScreen(1, 2)">Open</button>
+    </div>
+
+    <!-- Screen 2: The Question -->
+    <div id="screen2" class="screen">
+        <h1>Are u hurt?</h1>
+        <!-- Both buttons trigger the same apology screen -->
+        <button onclick="startApology()">Yes</button>
+        <button onclick="startApology()">No</button>
+    </div>
+
+    <!-- Screen 3: The Typewriter Apology -->
+    <div id="screen3" class="screen">
+        <div id="typewriter-text"></div>
+        <!-- This button stays hidden until the typing is totally finished -->
+        <button id="next-btn" style="display: none;" onclick="goToScreen(3, 4)">Next</button>
+    </div>
+
+    <!-- Screen 4: The Final Message -->
+    <div id="screen4" class="screen">
+        <h1>I'm sorry I hurt you ❤️</h1>
+    </div>
+
+    <script>
+        // ==========================================
+        // ✏️ ENTER YOUR APOLOGY MESSAGE RIGHT HERE:
+        // ==========================================
+        const myApology = "Hi Sudeep.
+I made this because a simple "I'm sorry" didn't feel like enough.
+I know I hurt you, and I take full responsibility for it. A couple of months ago I said things about you that I never should have said. I judged you unfairly and repeated something hurtful because of assumptions I made. Looking back, I hate that I ever spoke about you that way.
+As I got to know you, I realized how wrong I was. You're genuinely kind, caring, and nothing like the picture I had created in my head. That doesn't erase what I said, and I'm not using it as an excuse. I just want you to know that I recognize how unfair I was.
+You deserved respect from the beginning, even before I knew you well, and I failed to give you that.
+I understand if this changed the way you see me. Trust isn't rebuilt because of one apology or one website. It's rebuilt by consistently being honest, respectful, and proving through my actions that I've changed. That's what I want to do.
+We've only been together for a short time, but these past few days have made me realize how much I care about you. I don't want to be someone who hurts the person he cares about.
+Thank you for reading this. Whether it takes time or not, I hope I can earn back your trust.
+I'm truly sorry and i love you.
+❤️";
+        
+        
+        // --- Logic & Animations below ---
+
+        // Function to switch between screens
+        function goToScreen(current, next) {
+            document.getElementById(`screen${current}`).classList.remove('active');
+            document.getElementById(`screen${next}`).classList.add('active');
+        }
+
+        // Function triggered when she clicks Yes or No
+        function startApology() {
+            goToScreen(2, 3);
+            typeWriter();
+        }
+
+        // Typewriter effect variables
+        let i = 0;
+        const typingSpeed = 45; // Speed in milliseconds (lower is faster)
+
+        function typeWriter() {
+            if (i < myApology.length) {
+                document.getElementById("typewriter-text").innerHTML += myApology.charAt(i);
+                i++;
+                setTimeout(typeWriter, typingSpeed);
+            } else {
+                // Once the message is done typing, show the "Next" button
+                document.getElementById("next-btn").style.display = "inline-block";
+            }
+        }
+    </script>
+</body>
+</html>
