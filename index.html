@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This meta tag is crucial for fitting everything onto a mobile screen perfectly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For You</title>
     <style>
         /* Smooth, animated pastel background */
@@ -27,16 +28,22 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Glassmorphism cute panels */
+        /* Glassmorphism cute panels - Adjusted for Mobile */
         .screen {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 25px;
+            padding: 30px 20px;
+            border-radius: 20px;
             box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
-            max-width: 85%;
-            width: 450px;
+            width: 85%;
+            max-width: 400px;
+            max-height: 85vh; /* Prevents the box from going off-screen vertically */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-sizing: border-box;
         }
         
         @keyframes popIn {
@@ -45,8 +52,8 @@
         }
         
         h1 {
-            font-size: 28px;
-            margin-bottom: 25px;
+            font-size: 24px;
+            margin-bottom: 20px;
             font-weight: 700;
             color: #ec8b9e;
         }
@@ -56,18 +63,20 @@
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             border: none;
             border-radius: 30px;
-            padding: 14px 35px;
-            font-size: 17px;
+            padding: 12px 30px;
+            font-size: 16px;
             font-weight: bold;
             color: #6a4a52;
             cursor: pointer;
-            margin: 10px;
+            margin: 8px;
             transition: all 0.3s ease;
             box-shadow: 0 6px 15px rgba(255, 154, 158, 0.4);
+            width: 100%;
+            max-width: 200px;
         }
         
         button:hover {
-            transform: translateY(-4px) scale(1.05);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 20px rgba(255, 154, 158, 0.6);
             color: #fff;
         }
@@ -76,16 +85,41 @@
             transform: translateY(0px) scale(0.95);
         }
 
-        /* Typewriter area */
+        /* Container to center the typewriter properly */
+        #typewriter-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Typewriter area - Optimized for Mobile Scrolling */
         #typewriter-text {
-            font-size: 16px;
-            line-height: 1.7;
-            min-height: 400px; /* Keeps the panel size steady */
-            margin-bottom: 20px;
+            font-size: 15px; /* Slightly smaller for mobile readability */
+            line-height: 1.6;
+            height: 55vh; /* Locks the height so it doesn't push buttons off screen */
+            width: 100%;
+            margin-bottom: 15px;
             text-align: left;
             border-left: 4px solid #ff9a9e;
-            padding-left: 15px;
-            overflow-y: auto;
+            padding-left: 12px;
+            padding-right: 5px;
+            overflow-y: auto; /* Enables scrolling */
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        /* Custom cute pink scrollbar */
+        #typewriter-text::-webkit-scrollbar {
+            width: 6px;
+        }
+        #typewriter-text::-webkit-scrollbar-track {
+            background: #ffe4e1;
+            border-radius: 10px;
+        }
+        #typewriter-text::-webkit-scrollbar-thumb {
+            background: #ffb6c1;
+            border-radius: 10px;
         }
 
         /* Heart styling for the end */
@@ -108,7 +142,7 @@
 <body>
 
     <!-- Screen 1: The Menu -->
-    <div id="screen1" class="screen" style="display: block;">
+    <div id="screen1" class="screen" style="display: flex;">
         <h1>I'm so sorry 🥺</h1>
         <button onclick="switchScreen('screen1', 'screen2')">Open</button>
     </div>
@@ -122,8 +156,10 @@
 
     <!-- Screen 3: The Typewriter Apology -->
     <div id="screen3" class="screen" style="display: none;">
-        <div id="typewriter-text"></div>
-        <button id="next-btn" style="display: none;" onclick="switchScreen('screen3', 'screen4')">Next</button>
+        <div id="typewriter-container">
+            <div id="typewriter-text"></div>
+            <button id="next-btn" style="display: none;" onclick="switchScreen('screen3', 'screen4')">Next</button>
+        </div>
     </div>
 
     <!-- Screen 4: The Final Message -->
@@ -133,14 +169,13 @@
     </div>
 
     <script>
-        // The exact apology text you provided
         const apologyText = `Hi Sudeep.
 
 I made this because a simple "I'm sorry" didn't feel like enough.
 
 I know I hurt you, and I take full responsibility for it. A couple of months ago I said things about you that I never should have said. I judged you unfairly and repeated something hurtful because of assumptions I made. Looking back, I hate that I ever spoke about you that way.
 
-As I got to know you, I realized how wrong I was. You're genuinely kind, caring, and nothing like the picture I had created in my head. That doesn't erase what I said, and I'm not using it as an excuse. I just want you to know that I recognize how unfair I was.
+As I got to know you, I realized how wrong I was. You're genuinely kind, caring, and nothing like the picture I had created in my head. That doesn't change what I said, and I'm not using it as an excuse. I just want you to know that I recognize how unfair I was.
 
 You deserved respect from the beginning, even before I knew you well, and I failed to give you that.
 
@@ -155,7 +190,7 @@ I'm truly sorry and i love you. ❤️`;
         // Direct style switching for guaranteed functionality
         function switchScreen(hideId, showId) {
             document.getElementById(hideId).style.display = 'none';
-            document.getElementById(showId).style.display = 'block';
+            document.getElementById(showId).style.display = 'flex';
         }
 
         // Move to screen 3 and start typing
@@ -164,24 +199,30 @@ I'm truly sorry and i love you. ❤️`;
             typeWriter();
         }
 
-        // Typewriter logic
+        // Typewriter logic with auto-scroll
         let i = 0;
-        const typingSpeed = 35; // Adjust speed if needed
+        const typingSpeed = 40; 
+        const textBox = document.getElementById("typewriter-text");
 
         function typeWriter() {
             if (i < apologyText.length) {
                 let char = apologyText.charAt(i);
-                // Converts line breaks in the text into actual line breaks in HTML
+                
                 if (char === '\n') {
-                    document.getElementById("typewriter-text").innerHTML += "<br>";
+                    textBox.innerHTML += "<br>";
                 } else {
-                    document.getElementById("typewriter-text").innerHTML += char;
+                    textBox.innerHTML += char;
                 }
+                
+                // This line automatically scrolls the box to the bottom as it types!
+                textBox.scrollTop = textBox.scrollHeight;
+                
                 i++;
                 setTimeout(typeWriter, typingSpeed);
             } else {
-                // Show the Next button when finished typing
+                // Show the Next button when finished typing and scroll one last time
                 document.getElementById("next-btn").style.display = "inline-block";
+                textBox.scrollTop = textBox.scrollHeight;
             }
         }
     </script>
