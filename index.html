@@ -2,117 +2,195 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Sudeep ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe4e1);
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             height: 100vh;
+            width: 100vw;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            color: #333;
+            color: #4a4a4a;
         }
 
-        /* Floating background hearts */
+        /* Cute Floating Hearts Background */
         .heart-bg {
             position: absolute;
-            font-size: 24px;
-            color: rgba(255, 255, 255, 0.5);
-            animation: float 6s linear infinite;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            animation: floatup linear infinite;
             z-index: 0;
+            pointer-events: none;
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        @keyframes floatup {
+            0% { transform: translateY(110vh) scale(0.8) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
         }
 
+        /* Main Card Style */
         .card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 154, 158, 0.4);
             text-align: center;
             width: 90%;
-            max-width: 400px;
+            max-width: 380px;
             z-index: 10;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Menu Screen Specifics */
+        #menu-screen h1 {
+            font-size: 26px;
+            color: #ff6b81;
+            margin-bottom: 10px;
+        }
+
+        #menu-screen p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #7a7a7a;
+        }
+
+        .heartbeat {
+            font-size: 50px;
+            animation: beat 1s infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        @keyframes beat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        /* Quiz Screen Specifics */
+        #quiz-screen {
+            display: none;
+            min-height: 250px;
         }
 
         h2 {
-            font-size: 22px;
+            font-size: 20px;
             margin-bottom: 30px;
-            min-height: 80px;
+            min-height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .fade-out {
+            opacity: 0 !important;
         }
 
         .btn-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             position: relative;
-            min-height: 60px;
+            width: 100%;
+            min-height: 50px;
         }
 
         button {
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             font-size: 18px;
-            font-weight: bold;
-            padding: 12px 30px;
+            font-weight: 700;
+            padding: 12px 35px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
             outline: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            color: white;
+            font-size: 20px;
+            padding: 15px 50px;
+            box-shadow: 0 8px 20px rgba(255, 107, 129, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 129, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 107, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 129, 0); }
         }
 
         .yes-btn {
-            background-color: #ff4d6d;
+            background-color: #ff4757;
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
-        }
-
-        .yes-btn:active {
-            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+            flex: 1;
         }
 
         .no-btn {
-            background-color: #f8f9fa;
-            color: #555;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            /* Transition for the smooth running away effect */
-            transition: all 0.3s ease; 
+            background-color: #f1f2f6;
+            color: #57606f;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            transition: top 0.3s ease, left 0.3s ease; /* Smooth running away */
         }
 
-        .no-btn:active {
-            transform: scale(0.95);
+        button:active {
+            transform: scale(0.92);
         }
 
         .progress {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #888;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #a4b0be;
+            font-weight: bold;
+        }
+
+        /* End Screen Specifics */
+        #end-screen {
+            display: none;
+            text-align: center;
+        }
+        
+        #end-screen h1 {
+            color: #ff4757;
+            font-size: 28px;
+            line-height: 1.4;
         }
 
         /* Admin Panel Styles */
         #admin-panel {
             display: none;
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             background: white;
             z-index: 100;
             overflow-y: auto;
             padding: 20px;
-            box-sizing: border-box;
         }
 
         .admin-table {
@@ -123,23 +201,22 @@
         }
 
         .admin-table th, .admin-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #ffe4e1;
+            padding: 10px;
             text-align: left;
         }
 
         .admin-table th {
-            background-color: #ff4d6d;
+            background-color: #ff6b81;
             color: white;
         }
 
-        /* Hidden trigger button */
         #secret-trigger {
             position: fixed;
-            bottom: 10px;
-            right: 10px;
-            width: 30px;
-            height: 30px;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
             opacity: 0;
             z-index: 50;
         }
@@ -149,24 +226,42 @@
 
     <!-- Floating Background Hearts -->
     <script>
-        for(let i = 0; i < 15; i++) {
+        const symbols = ['❤️', '✨', '💖', '🌸'];
+        for(let i = 0; i < 20; i++) {
             let heart = document.createElement('div');
-            heart.innerHTML = '❤️';
+            heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
             heart.className = 'heart-bg';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.animationDelay = (Math.random() * 5) + 's';
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
             document.body.appendChild(heart);
         }
     </script>
 
-    <div class="card" id="quiz-card">
+    <!-- Menu Screen -->
+    <div class="card" id="menu-screen">
+        <div class="heartbeat">💌</div>
+        <h1>For Sudeep</h1>
+        <p>I made a little something for you...</p>
+        <button class="start-btn" onclick="startQuiz()">Open</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="card" id="quiz-screen">
         <h2 id="question-text">Loading...</h2>
-        <div class="btn-container">
+        <div class="btn-container" id="btn-container">
             <button class="yes-btn" onclick="answer('Yes')">Yes</button>
             <button class="no-btn" id="no-btn" onclick="answer('No')">No</button>
         </div>
         <div class="progress" id="progress-text">1 / 40</div>
+    </div>
+
+    <!-- End Screen -->
+    <div class="card" id="end-screen">
+        <div class="heartbeat">💖</div>
+        <h1>I Love You<br>So Much Babe</h1>
+        <p style="color: #7a7a7a; margin-top: 10px;">(You can close this now!)</p>
     </div>
 
     <!-- Hidden element to trigger admin panel on mobile/desktop -->
@@ -174,14 +269,14 @@
 
     <!-- Admin Panel -->
     <div id="admin-panel">
-        <h2 style="color: #ff4d6d;">Secret Answer Vault</h2>
-        <button class="yes-btn" onclick="closeAdmin()">Close</button>
+        <h2 style="color: #ff4757; text-align:center; margin-bottom: 10px;">Secret Answer Vault</h2>
+        <button class="start-btn" style="padding: 10px 20px; font-size: 14px;" onclick="closeAdmin()">Close Vault</button>
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Question</th>
-                    <th>Answer</th>
+                    <th style="width: 10%;">#</th>
+                    <th style="width: 70%;">Question</th>
+                    <th style="width: 20%;">Answer</th>
                 </tr>
             </thead>
             <tbody id="admin-body">
@@ -241,25 +336,38 @@
         const questionText = document.getElementById('question-text');
         const progressText = document.getElementById('progress-text');
         const noBtn = document.getElementById('no-btn');
-        const quizCard = document.getElementById('quiz-card');
+        const quizCard = document.getElementById('quiz-screen');
+
+        function startQuiz() {
+            document.getElementById('menu-screen').style.display = 'none';
+            quizCard.style.display = 'flex';
+            loadQuestion();
+        }
 
         function loadQuestion() {
             if (currentIndex >= questions.length) {
                 // Quiz Complete
-                questionText.innerHTML = "Yay! Thank you for playing! I love you! ❤️";
-                document.querySelector('.btn-container').style.display = 'none';
-                progressText.innerHTML = "100% Complete";
+                quizCard.style.display = 'none';
+                document.getElementById('end-screen').style.display = 'block';
                 // Save to local storage for the admin panel
                 localStorage.setItem('sudeepAnswers', JSON.stringify(savedAnswers));
                 return;
             }
 
-            questionText.innerText = questions[currentIndex];
-            progressText.innerText = `${currentIndex + 1} / 40`;
-
-            // Reset the 'No' button position every time a new question loads
-            noBtn.style.position = 'static';
-            noBtn.style.transform = 'translate(0, 0)';
+            // Fade animation
+            questionText.style.opacity = 0;
+            
+            setTimeout(() => {
+                questionText.innerText = questions[currentIndex];
+                progressText.innerText = `${currentIndex + 1} / 40`;
+                questionText.style.opacity = 1;
+                
+                // Reset the 'No' button position safely
+                noBtn.style.position = 'static';
+                noBtn.style.flex = '1';
+                noBtn.style.left = 'auto';
+                noBtn.style.top = 'auto';
+            }, 300);
         }
 
         function answer(response) {
@@ -271,31 +379,41 @@
             loadQuestion();
         }
 
-        // --- TRICK BUTTON LOGIC (Runs on questions 31-40) ---
+        // --- MOBILE SAFE TRICK BUTTON LOGIC ---
         function moveButton(e) {
-            // Arrays are 0-indexed, so 30 is question 31
             if (currentIndex >= 30) { 
-                e.preventDefault(); // Stops her from clicking it on mobile
+                e.preventDefault();
                 
-                // Calculate random positions within the window
-                const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2 - 50);
-                const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2 - 50);
+                // Switch to fixed positioning so it moves relative to the entire screen
+                noBtn.style.position = 'fixed';
+                noBtn.style.flex = 'none';
                 
-                // Make the button jump around
-                noBtn.style.position = 'absolute';
-                noBtn.style.transform = `translate(${x}px, ${y}px)`;
+                const btnWidth = noBtn.offsetWidth || 100;
+                const btnHeight = noBtn.offsetHeight || 50;
+                
+                // Calculate maximum bounds so the button never leaves the screen
+                const maxX = window.innerWidth - btnWidth - 20;
+                const maxY = window.innerHeight - btnHeight - 20;
+                
+                // Generate a random position within bounds
+                const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+                const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+                
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
             }
         }
 
-        // Works for both computer mice and mobile phone tapping
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', moveButton);
 
         // --- ADMIN PANEL LOGIC ---
         function checkAdmin() {
-            let code = prompt("Enter secret code:");
+            let code = prompt("Admin Panel Code:");
             if (code === "ils03") {
-                document.getElementById('quiz-card').style.display = 'none';
+                document.getElementById('menu-screen').style.display = 'none';
+                document.getElementById('quiz-screen').style.display = 'none';
+                document.getElementById('end-screen').style.display = 'none';
                 document.getElementById('admin-panel').style.display = 'block';
                 populateTable();
             }
@@ -303,14 +421,13 @@
 
         function closeAdmin() {
             document.getElementById('admin-panel').style.display = 'none';
-            document.getElementById('quiz-card').style.display = 'block';
+            document.getElementById('menu-screen').style.display = 'flex';
         }
 
         function populateTable() {
             const tbody = document.getElementById('admin-body');
             tbody.innerHTML = '';
             
-            // Try to load saved answers, or use current session answers
             let answersToDisplay = savedAnswers.length > 0 ? savedAnswers : JSON.parse(localStorage.getItem('sudeepAnswers') || '[]');
 
             answersToDisplay.forEach((item, index) => {
@@ -318,27 +435,26 @@
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${item.q.substring(item.q.indexOf('.') + 1).trim()}</td>
-                    <td style="font-weight:bold; color: ${item.a === 'Yes' ? '#ff4d6d' : '#555'}">${item.a}</td>
+                    <td style="font-weight:bold; color: ${item.a === 'Yes' ? '#ff4757' : '#57606f'}">${item.a}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        // Listen for typing the code on a keyboard (if on a computer)
+        // Secret keyboard listener for PC
         let keys = "";
         document.addEventListener('keydown', (e) => {
             keys += e.key;
             if (keys.length > 5) keys = keys.slice(1);
             if (keys === "ils03") {
-                document.getElementById('quiz-card').style.display = 'none';
+                document.getElementById('menu-screen').style.display = 'none';
+                document.getElementById('quiz-screen').style.display = 'none';
+                document.getElementById('end-screen').style.display = 'none';
                 document.getElementById('admin-panel').style.display = 'block';
                 populateTable();
-                keys = ""; // reset
+                keys = ""; 
             }
         });
-
-        // Initialize first question
-        loadQuestion();
     </script>
 </body>
 </html>
