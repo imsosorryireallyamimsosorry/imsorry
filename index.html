@@ -2,229 +2,343 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- This meta tag is crucial for fitting everything onto a mobile screen perfectly -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For You</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
     <style>
-        /* Smooth, animated pastel background */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
         body {
-            background: linear-gradient(-45deg, #ffb6c1, #ffc0cb, #ffe4e1, #fff0f5);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            text-align: center;
-            color: #6a4a52; /* Soft deep pink-brown */
-            overflow: hidden;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Glassmorphism cute panels - Adjusted for Mobile */
-        .screen {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
-            width: 85%;
-            max-width: 400px;
-            max-height: 85vh; /* Prevents the box from going off-screen vertically */
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe4e1);
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-sizing: border-box;
+            overflow: hidden;
+            color: #333;
         }
-        
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        
-        h1 {
+
+        /* Floating background hearts */
+        .heart-bg {
+            position: absolute;
             font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: 700;
-            color: #ec8b9e;
-        }
-        
-        /* Bouncy, beautiful buttons */
-        button {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            border: none;
-            border-radius: 30px;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #6a4a52;
-            cursor: pointer;
-            margin: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 15px rgba(255, 154, 158, 0.4);
-            width: 100%;
-            max-width: 200px;
-        }
-        
-        button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.6);
-            color: #fff;
+            color: rgba(255, 255, 255, 0.5);
+            animation: float 6s linear infinite;
+            z-index: 0;
         }
 
-        button:active {
-            transform: translateY(0px) scale(0.95);
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* Container to center the typewriter properly */
-        #typewriter-container {
-            width: 100%;
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            z-index: 10;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 30px;
+            min-height: 80px;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
         }
 
-        /* Typewriter area - Optimized for Mobile Scrolling */
-        #typewriter-text {
-            font-size: 15px; /* Slightly smaller for mobile readability */
-            line-height: 1.6;
-            height: 55vh; /* Locks the height so it doesn't push buttons off screen */
-            width: 100%;
-            margin-bottom: 15px;
-            text-align: left;
-            border-left: 4px solid #ff9a9e;
-            padding-left: 12px;
-            padding-right: 5px;
-            overflow-y: auto; /* Enables scrolling */
-            scroll-behavior: smooth;
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .yes-btn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .yes-btn:active {
+            transform: scale(0.95);
+        }
+
+        .no-btn {
+            background-color: #f8f9fa;
+            color: #555;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            /* Transition for the smooth running away effect */
+            transition: all 0.3s ease; 
+        }
+
+        .no-btn:active {
+            transform: scale(0.95);
+        }
+
+        .progress {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Admin Panel Styles */
+        #admin-panel {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            z-index: 100;
+            overflow-y: auto;
+            padding: 20px;
             box-sizing: border-box;
         }
 
-        /* Custom cute pink scrollbar */
-        #typewriter-text::-webkit-scrollbar {
-            width: 6px;
-        }
-        #typewriter-text::-webkit-scrollbar-track {
-            background: #ffe4e1;
-            border-radius: 10px;
-        }
-        #typewriter-text::-webkit-scrollbar-thumb {
-            background: #ffb6c1;
-            border-radius: 10px;
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
         }
 
-        /* Heart styling for the end */
-        .heart {
-            font-size: 50px;
-            animation: heartbeat 1.5s infinite;
-            display: inline-block;
-            margin-top: 10px;
+        .admin-table th, .admin-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
         }
 
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.2); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.2); }
-            60% { transform: scale(1); }
+        .admin-table th {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        /* Hidden trigger button */
+        #secret-trigger {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            z-index: 50;
         }
     </style>
 </head>
 <body>
 
-    <!-- Screen 1: The Menu -->
-    <div id="screen1" class="screen" style="display: flex;">
-        <h1>I'm so sorry 🥺</h1>
-        <button onclick="switchScreen('screen1', 'screen2')">Open</button>
-    </div>
+    <!-- Floating Background Hearts -->
+    <script>
+        for(let i = 0; i < 15; i++) {
+            let heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart-bg';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(heart);
+        }
+    </script>
 
-    <!-- Screen 2: The Question -->
-    <div id="screen2" class="screen" style="display: none;">
-        <h1>Are u hurt?</h1>
-        <button onclick="startApology()">Yes</button>
-        <button onclick="startApology()">No</button>
-    </div>
-
-    <!-- Screen 3: The Typewriter Apology -->
-    <div id="screen3" class="screen" style="display: none;">
-        <div id="typewriter-container">
-            <div id="typewriter-text"></div>
-            <button id="next-btn" style="display: none;" onclick="switchScreen('screen3', 'screen4')">Next</button>
+    <div class="card" id="quiz-card">
+        <h2 id="question-text">Loading...</h2>
+        <div class="btn-container">
+            <button class="yes-btn" onclick="answer('Yes')">Yes</button>
+            <button class="no-btn" id="no-btn" onclick="answer('No')">No</button>
         </div>
+        <div class="progress" id="progress-text">1 / 40</div>
     </div>
 
-    <!-- Screen 4: The Final Message -->
-    <div id="screen4" class="screen" style="display: none;">
-        <h1>I'm sorry I hurt you</h1>
-        <div class="heart">❤️</div>
+    <!-- Hidden element to trigger admin panel on mobile/desktop -->
+    <div id="secret-trigger" onclick="checkAdmin()"></div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel">
+        <h2 style="color: #ff4d6d;">Secret Answer Vault</h2>
+        <button class="yes-btn" onclick="closeAdmin()">Close</button>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody id="admin-body">
+                <!-- Answers will populate here -->
+            </tbody>
+        </table>
     </div>
 
     <script>
-        const apologyText = `Hi Sudeep.
+        const questions = [
+            "1. Do you think I'm the best boyfriend you've ever had?",
+            "2. Do you trust me with your whole heart?",
+            "3. Do you see us lasting a long time?",
+            "4. Do you feel safe with me?",
+            "5. Do you think I make you happy?",
+            "6. Would you choose me all over again?",
+            "7. Do you miss me when we're apart?",
+            "8. Have I changed your life for the better?",
+            "9. Do you think I understand you better than most people?",
+            "10. Would you still love me even if life got really difficult?",
+            "11. Have you ever blushed because of me?",
+            "12. Do you get butterflies when I text you?",
+            "13. Have you ever stared at my pictures for longer than you'd admit?",
+            "14. Would you kiss me if we were together right now?",
+            "15. Do you secretly love when I get clingy?",
+            "16. Have you ever dreamed about me?",
+            "17. Do you think I'm attractive?",
+            "18. Would you cuddle with me all day if you could?",
+            "19. Have I ever made your heart race?",
+            "20. Would you be jealous if another girl flirted with me?",
+            "21. Would you save your phone before me if both were falling? 💀",
+            "22. If I lost all my hair, would you still find me attractive?",
+            "23. Would you laugh if I tripped in public?",
+            "24. If your favorite celebrity asked you out, would you say yes?",
+            "25. Do you think you're always right?",
+            "26. Would you steal my fries even if you said you weren't hungry?",
+            "27. If we played Mario Kart, would you target me on purpose?",
+            "28. Would you post an embarrassing picture of me for $1,000?",
+            "29. Do you think you're funnier than me?",
+            "30. If I lost every game we played for a year, would you still respect me? 😭",
+            // The Next 10 (Trick Questions)
+            "31. Do you love your boyfriend? ❤️",
+            "32. Are you happy we're together?",
+            "33. Do you think your boyfriend is cute?",
+            "34. Are you proud to call him your boyfriend?",
+            "35. Do you enjoy spending time with your boyfriend?",
+            "36. Do you think your boyfriend makes you smile?",
+            "37. Would you choose your boyfriend all over again?",
+            "38. Do you think your boyfriend is special to you?",
+            "39. Are you lucky to have your boyfriend? 😉",
+            "40. Will you keep loving your boyfriend forever? ❤️"
+        ];
 
-I made this because a simple "I'm sorry" didn't feel like enough.
+        let currentIndex = 0;
+        let savedAnswers = [];
+        
+        const questionText = document.getElementById('question-text');
+        const progressText = document.getElementById('progress-text');
+        const noBtn = document.getElementById('no-btn');
+        const quizCard = document.getElementById('quiz-card');
 
-I know I hurt you, and I take full responsibility for it. A couple of months ago I said things about you that I never should have said. I judged you unfairly and repeated something hurtful because of assumptions I made. Looking back, I hate that I ever spoke about you that way.
+        function loadQuestion() {
+            if (currentIndex >= questions.length) {
+                // Quiz Complete
+                questionText.innerHTML = "Yay! Thank you for playing! I love you! ❤️";
+                document.querySelector('.btn-container').style.display = 'none';
+                progressText.innerHTML = "100% Complete";
+                // Save to local storage for the admin panel
+                localStorage.setItem('sudeepAnswers', JSON.stringify(savedAnswers));
+                return;
+            }
 
-As I got to know you, I realized how wrong I was. You're genuinely kind, caring, and nothing like the picture I had created in my head. That doesn't change what I said, and I'm not using it as an excuse. I just want you to know that I recognize how unfair I was.
+            questionText.innerText = questions[currentIndex];
+            progressText.innerText = `${currentIndex + 1} / 40`;
 
-You deserved respect from the beginning, even before I knew you well, and I failed to give you that.
-
-I understand if this changed the way you see me. Trust isn't rebuilt because of one apology or one website. It's rebuilt by consistently being honest, respectful, and proving through my actions that I've changed. That's what I want to do.
-
-We've only been together for a short time, but these past few days have made me realize how much I care about you. I don't want to be someone who hurts the person he cares about.
-
-Thank you for reading this. Whether it takes time or not, I hope I can earn back your trust.
-
-I'm truly sorry and i love you. ❤️`;
-
-        // Direct style switching for guaranteed functionality
-        function switchScreen(hideId, showId) {
-            document.getElementById(hideId).style.display = 'none';
-            document.getElementById(showId).style.display = 'flex';
+            // Reset the 'No' button position every time a new question loads
+            noBtn.style.position = 'static';
+            noBtn.style.transform = 'translate(0, 0)';
         }
 
-        // Move to screen 3 and start typing
-        function startApology() {
-            switchScreen('screen2', 'screen3');
-            typeWriter();
+        function answer(response) {
+            savedAnswers.push({
+                q: questions[currentIndex],
+                a: response
+            });
+            currentIndex++;
+            loadQuestion();
         }
 
-        // Typewriter logic with auto-scroll
-        let i = 0;
-        const typingSpeed = 40; 
-        const textBox = document.getElementById("typewriter-text");
-
-        function typeWriter() {
-            if (i < apologyText.length) {
-                let char = apologyText.charAt(i);
+        // --- TRICK BUTTON LOGIC (Runs on questions 31-40) ---
+        function moveButton(e) {
+            // Arrays are 0-indexed, so 30 is question 31
+            if (currentIndex >= 30) { 
+                e.preventDefault(); // Stops her from clicking it on mobile
                 
-                if (char === '\n') {
-                    textBox.innerHTML += "<br>";
-                } else {
-                    textBox.innerHTML += char;
-                }
+                // Calculate random positions within the window
+                const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2 - 50);
+                const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2 - 50);
                 
-                // This line automatically scrolls the box to the bottom as it types!
-                textBox.scrollTop = textBox.scrollHeight;
-                
-                i++;
-                setTimeout(typeWriter, typingSpeed);
-            } else {
-                // Show the Next button when finished typing and scroll one last time
-                document.getElementById("next-btn").style.display = "inline-block";
-                textBox.scrollTop = textBox.scrollHeight;
+                // Make the button jump around
+                noBtn.style.position = 'absolute';
+                noBtn.style.transform = `translate(${x}px, ${y}px)`;
             }
         }
+
+        // Works for both computer mice and mobile phone tapping
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton);
+
+        // --- ADMIN PANEL LOGIC ---
+        function checkAdmin() {
+            let code = prompt("Enter secret code:");
+            if (code === "ils03") {
+                document.getElementById('quiz-card').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                populateTable();
+            }
+        }
+
+        function closeAdmin() {
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('quiz-card').style.display = 'block';
+        }
+
+        function populateTable() {
+            const tbody = document.getElementById('admin-body');
+            tbody.innerHTML = '';
+            
+            // Try to load saved answers, or use current session answers
+            let answersToDisplay = savedAnswers.length > 0 ? savedAnswers : JSON.parse(localStorage.getItem('sudeepAnswers') || '[]');
+
+            answersToDisplay.forEach((item, index) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.q.substring(item.q.indexOf('.') + 1).trim()}</td>
+                    <td style="font-weight:bold; color: ${item.a === 'Yes' ? '#ff4d6d' : '#555'}">${item.a}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Listen for typing the code on a keyboard (if on a computer)
+        let keys = "";
+        document.addEventListener('keydown', (e) => {
+            keys += e.key;
+            if (keys.length > 5) keys = keys.slice(1);
+            if (keys === "ils03") {
+                document.getElementById('quiz-card').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                populateTable();
+                keys = ""; // reset
+            }
+        });
+
+        // Initialize first question
+        loadQuestion();
     </script>
 </body>
 </html>
